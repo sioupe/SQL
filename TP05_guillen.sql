@@ -13,4 +13,5 @@ SELECT bon.*,fournisseur.NOM FROM bon,fournisseur WHERE ID_FOU =fournisseur.ID A
 SELECT SUM(article.PRIX)FROM bon,compo,article WHERE ID_BON=bon.ID AND ID_ART=article.ID GROUP BY ID_BON;
 SELECT SUM(compo.QTE)FROM bon,compo,article WHERE ID_BON=bon.ID AND ID_ART=article.ID GROUP BY ID_BON;
 SELECT bon.ID,SUM(compo.QTE)FROM bon,compo,article WHERE ID_BON=bon.ID AND ID_ART=article.ID GROUP BY ID_BON HAVING SUM(compo.QTE)>25;
-
+facultatif
+SELECT * FROM article AS A1,article AS A2  WHERE A1.ID_FOU != A2.ID_FOU AND A1.DESIGNATION=A2.DESIGNATION;

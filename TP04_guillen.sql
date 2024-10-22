@@ -5,3 +5,7 @@ SELECT * FROM article WHERE PRIX BETWEEN 2.00 AND 6.25;
 SELECT * FROM article WHERE PRIX NOT BETWEEN 2.00 AND 6.25;
 SELECT * FROM article WHERE !(PRIX>2.00 AND PRIX<6.25);
 SELECT * FROM article,fournisseur WHERE ID_FOU=fournisseur.ID && (fournisseur.NOM = "Francaise d\'Imports" OR fournisseur.NOM = "Dubois & Fils");
+SELECT * FROM article WHERE ID_FOU = 1 OR ID_FOU = 3;
+SELECT * FROM article WHERE ID_FOU IN (1,3);
+SELECT * FROM article WHERE ID_FOU NOT IN (1,3);
+SELECT * FROM bon WHERE  DATE_CMDE BETWEEN '2019-02-01' AND '2019-04-30';

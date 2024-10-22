@@ -10,8 +10,11 @@ SELECT fournisseur.NOM ,AVG(PRIX) AS "moyenne des prix des articles" FROM articl
 SELECT * FROM bon WHERE DATE_CMDE BETWEEN '2019-03-01' AND '2019-04-05 12:00:00';
 SELECT * FROM bon WHERE bon.ID IN (SELECT ID_BON FROM compo INNER JOIN article ON ID_ART=article.ID WHERE article.DESIGNATION LIKE "%boulon%");
 SELECT bon.*,fournisseur.NOM FROM bon,fournisseur WHERE ID_FOU =fournisseur.ID AND bon.ID IN (SELECT ID_BON FROM compo INNER JOIN article ON ID_ART=article.ID WHERE article.DESIGNATION LIKE "%boulon%");
-SELECT SUM(article.PRIX)FROM bon,compo,article WHERE ID_BON=bon.ID AND ID_ART=article.ID GROUP BY ID_BON;
+SELECT SUM(article.PRIX*QTE)FROM bon,compo,article WHERE ID_BON=bon.ID AND ID_ART=article.ID GROUP BY ID_BON;
 SELECT SUM(compo.QTE)FROM bon,compo,article WHERE ID_BON=bon.ID AND ID_ART=article.ID GROUP BY ID_BON;
 SELECT bon.ID,SUM(compo.QTE)FROM bon,compo,article WHERE ID_BON=bon.ID AND ID_ART=article.ID GROUP BY ID_BON HAVING SUM(compo.QTE)>25;
 facultatif
 SELECT * FROM article AS A1,article AS A2  WHERE A1.ID_FOU != A2.ID_FOU AND A1.DESIGNATION=A2.DESIGNATION;
+SELECT MONTH(DATE_CMDE) AS mois,YEAR(DATE_CMDE) AS année, SUM(article.PRIX) AS" prix depenser dans le mois en bon "FROM bon,compo,article WHERE ID_BON=bon.ID AND ID_ART=article.ID GROUP BY MONTH(DATE_CMDE),YEAR(DATE_CMDE);
+SELECT * FROM bon WHERE bon.ID NOT IN (SELECT ID_BON FROM compo INNER JOIN article ON ID_ART=article.ID );
+SELECT  fournisseur.NOM, AVG(article.PRIX*QTE) AS 'prix moyen des bon de commande 'FROM bon,compo,article,fournisseur WHERE bon.ID_FOU=fournisseur.ID AND ID_BON=bon.ID AND ID_ART=article.ID GROUP BY bon.ID_FOU;
